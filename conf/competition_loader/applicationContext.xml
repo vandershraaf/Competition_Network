@@ -33,7 +33,7 @@
     	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
     	<property name="url" value="jdbc:mysql://localhost/competition" />
     	<property name="username" value="root" />
-    	<property name="password" value="mymysql" /> <!-- TODO : need to make a new user and password later on -->
+    	<property name="password" value="" /> <!-- TODO : need to make a new user and password later on -->
     </bean>
     
     

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+       >
+          
+    <!--  <import resource="moduleSettings.xml" /> -->
+    
+    <bean id="companyQueue" class="com.ashrafishak.compnet.input.CompanyQueue">
+    	<property name="fetcher" ref="compNetFetcher" />
+    	<property name="baseURL" value="http://api.crunchbase.com/v/1/company/" />
+    </bean>
+    
+    <bean id="compNetFetcher" class="com.ashrafishak.compnet.input.CompNetFetcher">
+    	<property name="baseURL" value="http://api.crunchbase.com/v/1/company/" />
+    	<property name="hibernateDao" ref="messageDao" />
+    </bean>
+    
+    <bean id="compNetComps" class="com.ashrafishak.compnet.input.CompNetCompetition">
+    	<!--  <property name="moduleLogger" ref="moduleLogger" /> -->
+    	<property name="hibernateDao" ref="messageDao" />
+    </bean>
+    
+    <!-- Hibernate configuration -->
+    
+   
+	<!-- NOTE: Edit this for deployed version -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    	<property name="url" value="jdbc:mysql://localhost/competition" />
+    	<property name="username" value="root" />
+    	<property name="password" value="mymysql" /> <!-- TODO : need to make a new user and password later on -->
+    </bean>
+    
+    
+    <bean id="messageDao" class="com.ashrafishak.compnet.input.HibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="transactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="txManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+		<property name="target">
+			<bean class="com.ashrafishak.compnet.input.HibernateDao">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+		
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+			<property name="mappingResources">
+				<list>
+					<value>com/ashrafishak/compnet/hibernate/hibernate.hbm.xml</value>
+				</list>
+			</property>
+		<property name="hibernateProperties" ref="hibernateProperties" />
+	</bean>
+		
+	<util:properties id="hibernateProperties">
+			<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			<prop key="hibernate.use_sql_comments">true</prop>
+			<prop key="hibernate.current_session_context_class">thread</prop>
+	</util:properties>
+		
+	<!-- Logging configuration  -->
+	<!--  
+	<bean id="moduleLogger" class="org.apache.log4j.Logger" factory-method="getLogger">
+		<constructor-arg type="String" value="com.ashrafishak.moduleLogger" />
+		<property name="additivity" value="false" />
+	</bean>
+-->
+</beans>

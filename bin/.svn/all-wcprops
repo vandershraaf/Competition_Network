@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/bin
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/bin/log4j.properties
+END
+moduleSettings.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/bin/moduleSettings.xml
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/bin/applicationContext.xml
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/bin/web.xml
+END
+hibernateSettings.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/bin/hibernateSettings.xml
+END

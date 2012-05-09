@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Competition Network Visualization</title>
+</head>
+
+<body>
+<form action="outputservlet" method="POST">
+<h2>Competition Network</h2>
+<p>From: <input type="text" name="from" /></p>
+<p>Egocentric: 
+<select name="egocentric">
+	<option value="1">1</option>
+	<option value="2">2</option>
+</select>
+</p>
+
+<p>Filter: 
+<select name="filter">
+	<option value="none">None</option>
+	<option value="category">Category</option>
+	<option value="city">City</option>
+</select>
+</p>
+<input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

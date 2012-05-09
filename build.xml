@@ -1,0 +1,176 @@
+<?xml version='1.0'?>
+<project name="CompetitionNetwork" default="compile" basedir=".">
+
+
+    <property name="src.dir" value="src"/>
+    <property name="conf.dir" value="conf" />
+	<property name="lib.dir" value="lib" />
+	<property name="class.dir" value="classes"/>
+    
+    <property name="war.company.dir" value="war/Company"/>
+    <property name="war.competition.dir" value="war/Competition"/>
+	<property name="war.output.dir" value="war/Output"/>
+	
+	
+	<!-- To check whether the JETTY_HOME is set in the environment-->
+	<property environment="env" />
+	
+	<condition property="jetty.home.dir" value="${env.JETTY_HOME}">
+		<isset property="env.JETTY_HOME"/>
+	</condition>
+	<condition property="jetty.home.dir" value="${jetty.home}">
+		<not>
+			<isset property="env.JETTY_HOME"/>
+		</not>
+	</condition>
+
+	
+	<path id="project.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+		<dirset dir="${basedir}"/>
+		<dirset dir="${class.dir}"/>
+	</path>
+	
+    <target name="init">
+        <mkdir dir="${class.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean, init" 
+     		description="Compiles all source code">
+        <javac srcdir="${src.dir}"
+               destdir="${class.dir}"
+        	   classpathref="project.class.path"
+        />
+    	
+    	<!-- Don't forget to include the hibernate mapping file to the class file-->
+    	<copy todir="${class.dir}/com/ashrafishak/compnet/hibernate">
+    		<fileset file="${src.dir}/com/ashrafishak/compnet/hibernate/hibernate.hbm.xml"/>
+    	</copy>
+    </target>
+	
+	<target name="build.company" depends="clean,compile" description="Building artifact for company loader">
+		<mkdir dir="${war.company.dir}" />
+		<mkdir dir="${war.company.dir}/WEB-INF" />
+		<mkdir dir="${war.company.dir}/WEB-INF/classes" />
+		<mkdir dir="${war.company.dir}/WEB-INF/lib" />
+		<copy todir="${war.company.dir}/WEB-INF">
+			<fileset file="${conf.dir}/companies_loader/applicationContext.xml" />	
+			<fileset file="${conf.dir}/companies_loader/web.xml" />	
+		</copy>
+		<copy todir="${war.company.dir}/WEB-INF/classes" >
+			<fileset dir="${class.dir}"/>
+			<fileset file="${conf.dir}/companies_loader/log4j.properties" />
+		</copy>
+		<copy todir="${war.company.dir}/WEB-INF/lib" >
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>		
+	</target>
+	
+	<target name="build.competition" depends="clean,compile" description="Building artifact for development">
+		<mkdir dir="${war.competition.dir}" />
+		<mkdir dir="${war.competition.dir}/WEB-INF" />
+		<mkdir dir="${war.competition.dir}/WEB-INF/classes" />
+		<mkdir dir="${war.competition.dir}/WEB-INF/lib" />
+		<copy todir="${war.competition.dir}/WEB-INF">
+			<fileset file="${conf.dir}/competition_loader/applicationContext.xml" />	
+			<fileset file="${conf.dir}/competition_loader/web.xml" />	
+		</copy>
+		<copy todir="${war.competition.dir}/WEB-INF/classes" >
+			<fileset dir="${class.dir}"/>
+			<fileset file="${conf.dir}/competition_loader/log4j.properties" />
+		</copy>
+		<copy todir="${war.competition.dir}/WEB-INF/lib" >
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>		
+	</target>
+	
+	<target name="build.output" depends="clean,compile" description="Building artifact for development">
+		<mkdir dir="${war.output.dir}" />
+		<copy todir="${war.output.dir}">
+			<fileset file="${conf.dir}/output_servlet/index.html" />	
+			<fileset file="${conf.dir}/output_servlet/view.jsp" />	
+			<fileset file="${conf.dir}/output_servlet/base.css" />		
+			<fileset file="${conf.dir}/output_servlet/ForceDirected.css" />		
+			<fileset file="${conf.dir}/output_servlet/jit-yc.js" />		
+			<fileset file="${conf.dir}/output_servlet/jit.js" />
+			<fileset file="${conf.dir}/output_servlet/tex2res4.png" />
+		</copy>
+		<mkdir dir="${war.output.dir}/WEB-INF" />
+		<mkdir dir="${war.output.dir}/WEB-INF/classes" />
+		<mkdir dir="${war.output.dir}/WEB-INF/lib" />
+		<copy todir="${war.output.dir}/WEB-INF">
+			<fileset file="${conf.dir}/output_servlet/applicationContext.xml" />	
+			<fileset file="${conf.dir}/output_servlet/web.xml" />			
+		</copy>
+		<copy todir="${war.output.dir}/WEB-INF/classes" >
+			<fileset dir="${class.dir}"/>
+			<fileset file="${conf.dir}/output_servlet/log4j.properties" />
+		</copy>
+		<copy todir="${war.output.dir}/WEB-INF/lib" >
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+	</target>
+	
+	
+	
+	<target name="deploy.company" depends="build.company">
+		<delete dir="${env.JETTY_HOME}/webapps/Company" />
+		<mkdir dir="${env.JETTY_HOME}/webapps/Company" />
+		<copy todir="${env.JETTY_HOME}/contexts" file="conf/companies_loader/companyJettyContext.xml" />
+		<copy todir="${env.JETTY_HOME}/webapps/Company" overwrite="true">
+			<fileset dir="${war.company.dir}" />
+		</copy>
+		
+	</target>
+	
+	<target name="deploy.competition" depends="build.competition">
+		<delete dir="${env.JETTY_HOME}/webapps/Competition" />
+		<mkdir dir="${env.JETTY_HOME}/webapps/Competition" />
+		<copy todir="${env.JETTY_HOME}/contexts" file="conf/competition_loader/competitionJettyContext.xml" />
+		<copy todir="${env.JETTY_HOME}/webapps/Competition" overwrite="true">
+			<fileset dir="${war.competition.dir}" />
+		</copy>
+	</target>
+	
+	<target name="deploy.output" depends="build.output">
+		<delete dir="${env.JETTY_HOME}/webapps/Output" />
+		<mkdir dir="${env.JETTY_HOME}/webapps/Output" />
+		<copy todir="${env.JETTY_HOME}/contexts" file="conf/output_servlet/outputJettyContext.xml" />
+		<copy todir="${env.JETTY_HOME}/webapps/Output" overwrite="true">
+			<fileset dir="${war.output.dir}" />
+		</copy>
+	</target>
+	
+	<target name="build.war" depends="build.output" description="Building artifact for production">
+		<copy todir="${war.output.dir}" file="${conf.dir}/output_servlet/production/view.jsp" overwrite="true"/>
+		<copy todir="${war.output.dir}/WEB-INF" file="${conf.dir}/output_servlet/production/applicationContext.xml" overwrite="true"/>
+		<mkdir dir="dest" />
+		<war destfile="dest/competition_network.war" webxml="conf/output_servlet/web.xml">
+			<fileset dir="${war.output.dir}" />
+		</war>
+		<copy todir="${env.JETTY_HOME}/contexts" file="${conf.dir}/output_servlet/production/outputJettyContext.xml" overwrite="true"/>
+	</target>
+	
+	<target name="deploy.war" depends="build.war">
+		<copy todir="${env.JETTY_HOME}/contexts" file="${conf.dir}/output_servlet/production/outputJettyContext.xml" overwrite="true"/>
+		<copy todir="${env.JETTY_HOME}/webapps" file="dest/competition_network.war" overwrite="true"/>
+	</target>
+	
+    <target name="clean" description="Erases contents of classes dir">
+        <delete dir="${class.dir}"/>
+        <delete dir="${war.company.dir}"/>
+        <delete dir="${war.competition.dir}"/>
+        <delete dir="${war.output.dir}"/>
+       	<delete dir="${war.dir}" />
+		<delete dir="/dist" />
+    </target>
+
+</project>

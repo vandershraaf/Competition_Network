@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production
+END
+base.css
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/base.css
+END
+hibernateSettings.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/hibernateSettings.xml
+END
+jit.js
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/jit.js
+END
+outputJettyContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/outputJettyContext.xml
+END
+moduleSettings.xml
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/moduleSettings.xml
+END
+view.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/view.jsp
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/applicationContext.xml
+END
+ForceDirected.css
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/ForceDirected.css
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/index.html
+END
+jit-yc.js
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/jit-yc.js
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/log4j.properties
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/competition-network/!svn/ver/20/trunk/CompetitionNetwork/conf/output_servlet/production/web.xml
+END

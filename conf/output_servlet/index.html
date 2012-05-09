@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Competition Network Visualization</title>
+<link type="text/css" href="ForceDirected.css" rel="stylesheet" />
+<link type="text/css" href="base.css" rel="stylesheet" />
+</head>
+
+<body>
+<div id="title">
+<h2>Competition Network</h2>
+<p class="intro">Visualizing tech companies competition in network diagram format [BETA]</p>
+</div>
+<div id="form">
+<div class="header">Method 1: Visualization</div>
+<p class="v">
+(This web application is far from perfect and still have plenty of bugs; so feel free to give any feedback) <br />
+The visulization program displays network graph of tech companies where they compete with each other. Every node represents one tech company,
+and each edge indicates that a company is a competition to another company connected with it. <br />
+The visualization does not diplay the whole network of tech companies competition; If it does, it would involve 80,000++ nodes. 
+Instead, only subgraph with <strong>center node</strong> of your choice will be displayed. You can set <strong>egocentricity</strong> 
+of the graph: it just means how far the furthest node to the center node. Setting the <strong>categorized by </strong> will color each 
+node according to its distinctive category.  
+</p>
+<form action="outputservlet" method="POST">
+<table id="tabler">
+<tr><td>Center Node</td><td><input type="text" name="from" /></td></tr>
+<tr><td>Egocentric</td><td><select name="egocentric">
+	<option value="1">1</option>
+	<option value="2">2</option>
+</select></td></tr>
+<tr><td>Categorized By</td><td><select name="filter">
+	<option value="none">None</option>
+	<option value="category">Category</option>
+	<!-- <option value="city">City</option> -->
+</select></td></tr>
+</table>
+<input type="submit" value="Submit" />
+</form>
+</div>
+
+<div id="rest">
+<div class="header">Method 2: REST Service</div>
+<p class="v">You can also get the visualization data using REST request to this site. There are 2 formats available: CSV and JSON. CSV file can used for 
+network analysis software such as Gephi and Many Eyes, while JSON file can be used on JIT Javascript visualization library. Here's the syntax: <br />
+<script src="http://pastebin.com/embed_js.php?i=6Qm83jND"></script>
+For example:
+<script src="http://pastebin.com/embed_js.php?i=6RTLY4vw"></script>
+</p>
+</div>
+
+<div class="smaller">
+<div class="header">About This Site</div>
+<p class="v">All tech companies data comes from Crunchbase (crunchbase.com). The visualization program uses JIT Javascript visualization library (thejit.com).
+</p>
+</div>
+
+<div class="smaller">
+<div class="header">Contact Me</div>
+<p class="v">Any feedback/problem please email to mishak@umd.edu. This website is developed by ashrafishak.com
+</p>
+</div>
+
+</body>
+</html>

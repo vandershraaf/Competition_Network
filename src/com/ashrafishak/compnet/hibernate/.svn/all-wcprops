@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/src/com/ashrafishak/compnet/hibernate
+END
+hibernate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/competition-network/!svn/ver/13/trunk/CompetitionNetwork/src/com/ashrafishak/compnet/hibernate/hibernate.hbm.xml
+END
+Company.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/competition-network/!svn/ver/19/trunk/CompetitionNetwork/src/com/ashrafishak/compnet/hibernate/Company.java
+END
+City.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/src/com/ashrafishak/compnet/hibernate/City.java
+END
+Office.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/src/com/ashrafishak/compnet/hibernate/Office.java
+END
+Tag.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/src/com/ashrafishak/compnet/hibernate/Tag.java
+END
+Category.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/competition-network/!svn/ver/8/trunk/CompetitionNetwork/src/com/ashrafishak/compnet/hibernate/Category.java
+END
